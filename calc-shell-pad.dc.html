@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#4f57c9" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{--bg:#fcfcfd;--panel:#ffffff;--panel-2:#f6f7f9;--input:#f3f4f6;--key:#f7f8f9;--line:#e7e8ec;--line-soft:#eef0f2;--track:#eceef1;--text:#14161a;--muted:#676b74;--accent:#4f57c9;--accent-2:#a4aaf0;--accent-ink:#ffffff;--bg-blur:rgba(252,252,253,.78)}
+[data-theme="dark"]{--bg:#08090a;--panel:#0e0f11;--panel-2:#121316;--input:#16181b;--key:#15171a;--line:#1e2024;--line-soft:#181a1d;--track:#2b2f36;--text:#f4f5f6;--muted:#8b8f98;--accent:#7b86e8;--accent-2:#3a4293;--accent-ink:#0b0c0d;--bg-blur:rgba(8,9,10,.78)}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text)}
+body{font-family:'Instrument Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+input{font-family:inherit}
+input[type=number]{-moz-appearance:textfield}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input[type=range]{-webkit-appearance:none;appearance:none;height:16px;background:transparent}
+input[type=range]::-webkit-slider-runnable-track{height:5px;border-radius:3px;background:var(--track)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;margin-top:-4.5px;border-radius:50%;background:var(--accent);border:2px solid var(--panel)}
+input[type=range]::-moz-range-track{height:5px;border-radius:3px;background:var(--track)}
+input[type=range]::-moz-range-progress{height:5px;border-radius:3px;background:var(--accent)}
+input[type=range]::-moz-range-thumb{width:12px;height:12px;border:2px solid var(--panel);border-radius:50%;background:var(--accent)}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--text)}
+::selection{background:var(--accent);color:var(--accent-ink)}
+textarea{font-family:inherit}
+@media (max-width:960px){
+  [data-r=shell]{flex-direction:column !important}
+  [data-r=aside]{width:100% !important;flex:none !important;flex-direction:row !important;align-items:stretch !important;overflow-x:auto;border-right:0 !important;border-bottom:1px solid var(--line) !important;padding:10px 12px !important;gap:7px !important}
+  [data-r=aside] [data-calc]{flex:0 0 auto !important;min-width:150px !important}
+  [data-r=aside-label],[data-r=aside-note]{display:none !important}
+  [data-r=main]{padding:24px 18px 56px !important}
+  [data-r=grid]{grid-template-columns:minmax(0,1fr) !important}
+}
+@media (max-width:700px){
+  [data-r=header]{height:auto !important;flex-wrap:wrap !important;padding:10px 12px !important;gap:8px !important;row-gap:6px}
+  [data-r=nav]{order:3;flex-basis:100%}
+  [data-r=title]{font-size:22px !important}
+  [data-r=main]{padding:20px 14px 52px !important}
+  [data-r=hero]{font-size:27px !important}
+  [data-r=chart-label]{width:32px !important}
+  [data-r=chart-right]{width:88px !important;font-size:11px !important}
+  [data-r=stamp],[data-r=footer-note]{display:none !important}
+  [data-r=key]{height:46px !important}
+  [data-r=bits]{grid-template-columns:repeat(4,minmax(0,1fr)) !important}
+}
+@media (max-width:440px){
+  [data-r=field-input] input[type=number]{width:66px !important}
+  [data-r=chart-right]{width:72px !important}
+  [data-r=key]{height:44px !important;font-size:15px !important}
+}
+</style>
+<script>
+(function(){var h=document.documentElement;if(!h.getAttribute('lang'))h.setAttribute('lang','en');try{var s=JSON.parse(localStorage.getItem('calcstudio.v2')||'{}');var t=s.theme||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');h.dataset.theme=t;}catch(e){h.dataset.theme='light';}})();
+</script>
+</helmet>
+
+<div data-r="shell-root" style="min-height:{{ shellMinHeight }};display:flex;flex-direction:column;background:var(--bg);color:var(--text);outline:none">
+
+  <header data-r="header" style="position:{{ headerPos }};top:0;z-index:6;display:{{ headerDisplay }};align-items:center;gap:16px;height:56px;padding:0 18px;border-bottom:1px solid var(--line);background:var(--bg-blur);backdrop-filter:blur(12px)">
+    <sc-if value="{{ standalone }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;align-items:center;gap:9px;padding-right:6px">
+        <div style="width:22px;height:22px;border-radius:6px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent-ink);font-size:12px;font-weight:600;font-family:'JetBrains Mono',monospace">∑</div>
+        <a href="{{ homeHref }}" style="font-size:13.5px;font-weight:600;letter-spacing:-0.01em;color:var(--text)" style-hover="color:var(--accent)">{{ brandName }}</a>
+      </div>
+    </sc-if>
+    <sc-if value="{{ embedded }}" hint-placeholder-val="{{ false }}">
+      <div style="flex:1;min-width:0;font-size:12px;color:var(--muted)">{{ catName }}</div>
+    </sc-if>
+    <nav data-r="nav" aria-label="Calculator categories" style="display:{{ navDisplay }};align-items:center;gap:2px;flex:1;overflow-x:auto">
+      <sc-for list="{{ cats }}" as="cat" hint-placeholder-count="4">
+        <a href="{{ cat.href }}" data-cat="{{ cat.id }}" onClick="{{ onCat }}" style="padding:6px 11px;border-radius:7px;font-size:13px;font-weight:500;white-space:nowrap;background:{{ cat.bg }};color:{{ cat.fg }};text-decoration:none" style-hover="color:var(--text)">{{ cat.n }}</a>
+      </sc-for>
+    </nav>
+    <div style="display:flex;align-items:center;gap:2px;padding:3px;border:1px solid var(--line);border-radius:8px" title="Currency">
+      <sc-for list="{{ currencies }}" as="c" hint-placeholder-count="4">
+        <button type="button" data-cur="{{ c.v }}" onClick="{{ onCurrency }}" style="min-width:26px;padding:4px 6px;border-radius:6px;font-size:12.5px;font-family:'JetBrains Mono',monospace;background:{{ c.bg }};color:{{ c.fg }}" style-hover="color:var(--text)">{{ c.l }}</button>
+      </sc-for>
+    </div>
+    <button type="button" onClick="{{ onTheme }}" title="Toggle theme" style="display:flex;align-items:center;gap:7px;padding:6px 10px;border-radius:7px;border:1px solid var(--line);font-size:12px;color:var(--muted)" style-hover="color:var(--text)">
+      <sc-if value="{{ isDark }}" hint-placeholder-val="{{ true }}">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" /></svg>
+      </sc-if>
+      <sc-if value="{{ isLight }}" hint-placeholder-val="{{ false }}">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4" /></svg>
+      </sc-if>
+      <span>{{ themeLabel }}</span>
+    </button>
+  </header>
+
+  <div data-r="shell" style="flex:1;display:flex;align-items:stretch;min-height:0">
+    <aside data-r="aside" aria-label="Calculators in this category" style="width:238px;flex:none;border-right:1px solid var(--line);padding:{{ asidePad }};display:flex;flex-direction:column;gap:3px;background:var(--panel-2)">
+      <div data-r="aside-label" style="padding:0 10px 10px;font-size:10.5px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted)">{{ catName }}</div>
+      <sc-for list="{{ calcs }}" as="c" hint-placeholder-count="4">
+        <a href="{{ c.href }}" data-calc="{{ c.id }}" onClick="{{ onCalc }}" style="display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:9px 11px;border-radius:8px;text-decoration:none;background:{{ c.bg }};box-shadow:{{ c.ring }}" style-hover="background:var(--input)">
+          <span style="font-size:13.5px;font-weight:500;color:{{ c.fg }}">{{ c.name }}</span>
+          <span style="font-size:11.5px;color:var(--muted);line-height:1.35">{{ c.desc }}</span>
+        </a>
+      </sc-for>
+      <div data-r="aside-note" style="margin-top:auto;padding:10px;font-size:11px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line)">Every input is saved in this browser only — nothing leaves your device.</div>
+    </aside>
+
+    <main data-r="main" style="flex:1;min-width:0;padding:{{ mainPad }};overflow-x:hidden">
+      <div style="max-width:1080px;margin:0 auto">
+        <sc-if value="{{ standalone }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:24px">
+            <div>
+              <h1 data-r="title" style="margin:0;font-size:27px;font-weight:600;letter-spacing:-0.025em">{{ title }}</h1>
+              <p style="margin:7px 0 0;font-size:13.5px;color:var(--muted);max-width:56ch;text-wrap:pretty">{{ subtitle }}</p>
+            </div>
+            <div data-r="stamp" style="font-size:11.5px;color:var(--muted);font-family:'JetBrains Mono',monospace">{{ stamp }}</div>
+          </div>
+        </sc-if>
+
+        
+
+        
+
+        
+
+        <sc-if value="{{ isPad }}" hint-placeholder-val="{{ false }}">
+          <div data-r="grid" style="display:grid;grid-template-columns:minmax(280px,400px) minmax(240px,1fr);gap:20px;align-items:start">
+            <section style="min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px">
+              <div style="background:var(--input);border-radius:11px;padding:14px 16px;min-height:92px;display:flex;flex-direction:column;justify-content:space-between">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+                  <span style="font-size:12.5px;color:var(--muted);font-family:'JetBrains Mono',monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ padExpr }}</span>
+                  <sc-if value="{{ isSci }}" hint-placeholder-val="{{ false }}">
+                    <button type="button" onClick="{{ onDeg }}" style="flex:none;font-size:10.5px;font-weight:600;letter-spacing:0.06em;padding:3px 7px;border-radius:5px;border:1px solid var(--line);color:var(--muted)" style-hover="color:var(--text)">{{ degLabel }}</button>
+                  </sc-if>
+                </div>
+                <div style="text-align:right;font-size:32px;font-weight:600;letter-spacing:-0.02em;font-family:'JetBrains Mono',monospace;overflow:hidden;text-overflow:ellipsis">{{ padOut }}</div>
+              </div>
+              <sc-if value="{{ isSci }}" hint-placeholder-val="{{ false }}">
+                <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:14px">
+                  <sc-for list="{{ sciKeys }}" as="k" hint-placeholder-count="15">
+                    <button type="button" data-k="{{ k.k }}" onClick="{{ onPad }}" style="height:38px;border-radius:8px;background:var(--key);border:1px solid var(--line);font-size:12.5px;color:var(--muted);font-family:'JetBrains Mono',monospace" style-hover="color:var(--text);background:var(--input)">{{ k.t }}</button>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px">
+                <sc-for list="{{ padKeys }}" as="k" hint-placeholder-count="19">
+                  <button type="button" data-r="key" data-k="{{ k.k }}" onClick="{{ onPad }}" style="height:52px;border-radius:10px;border:1px solid var(--line);font-size:16.5px;font-weight:500;font-family:'JetBrains Mono',monospace;grid-column:span {{ k.s }};background:{{ k.bg }};color:{{ k.fg }}" style-hover="border-color:var(--accent)">{{ k.t }}</button>
+                </sc-for>
+              </div>
+              <p style="margin:14px 2px 2px;font-size:11px;color:var(--muted)">Keyboard works too — digits, operators, Enter, Backspace, Esc.</p>
+            </section>
+
+            <section style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+                <div style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)">History</div>
+                <button type="button" onClick="{{ onClearHistory }}" style="font-size:11.5px;color:var(--muted);padding:4px 8px;border-radius:6px;border:1px solid var(--line)" style-hover="color:var(--text)">Clear</button>
+              </div>
+              <sc-if value="{{ hasHistory }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;flex-direction:column">
+                  <sc-for list="{{ history }}" as="h" hint-placeholder-count="5">
+                    <button type="button" data-val="{{ h.out }}" onClick="{{ onRecall }}" style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;padding:10px 4px;border-bottom:1px solid var(--line-soft);text-align:right" style-hover="background:var(--panel-2)">
+                      <span style="font-size:11.5px;color:var(--muted);font-family:'JetBrains Mono',monospace">{{ h.expr }}</span>
+                      <span style="font-size:14px;font-weight:500;font-family:'JetBrains Mono',monospace">{{ h.out }}</span>
+                    </button>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ noHistory }}" hint-placeholder-val="{{ false }}">
+                <p style="margin:0;font-size:12.5px;color:var(--muted);line-height:1.55">Nothing yet. Results land here and stay in this browser between visits — tap one to reuse it.</p>
+              </sc-if>
+            </section>
+          </div>
+        </sc-if>
+      </div>
+    </main>
+  </div>
+
+  <footer data-r="footer" style="display:{{ footerDisplay }};align-items:center;gap:8px;height:46px;padding:0 18px;border-top:1px solid var(--line);background:var(--panel-2)">
+    <a href="{{ githubUrl }}" target="_blank" rel="noreferrer" title="GitHub profile" style="display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:7px;color:var(--muted)" style-hover="color:var(--text);background:var(--input)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.8a10.2 10.2 0 0 0-3.2 19.9c.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.4-1.1.7-1.4-2.2-.2-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.8-4.6 5 .4.4.7 1 .7 2v3c0 .3.2.6.7.5A10.2 10.2 0 0 0 12 1.8z" /></svg>
+    </a>
+    <a href="{{ blogUrl }}" target="_blank" rel="noreferrer" title="Blog" style="display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:7px;color:var(--muted)" style-hover="color:var(--text);background:var(--input)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H13l6 6v9.5A1.5 1.5 0 0 1 17.5 21h-12A1.5 1.5 0 0 1 4 19.5z" /><path d="M13 4v6h6M8 14h7M8 17.5h5" /></svg>
+    </a>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+      <span data-r="footer-note" style="font-size:11.5px;color:var(--muted)">{{ storageNote }}</span>
+      <button type="button" onClick="{{ onWipe }}" style="font-size:11.5px;color:var(--muted);padding:5px 9px;border-radius:6px;border:1px solid var(--line)" style-hover="color:var(--text)">Clear stored data</button>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;brandName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Calculator Drawer&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;siteUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;SEO&quot;},&quot;currency&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;$&quot;,&quot;₹&quot;,&quot;€&quot;,&quot;£&quot;],&quot;default&quot;:&quot;$&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#4f57c9&quot;,&quot;options&quot;:[&quot;#4f57c9&quot;,&quot;#b25a1f&quot;,&quot;#1f7d55&quot;,&quot;#a82f57&quot;],&quot;tsType&quot;:&quot;string&quot;},&quot;githubUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://github.com/&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Footer links&quot;},&quot;blogUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://blog.cloudflare.com/&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Footer links&quot;},&quot;embedded&quot;:{&quot;editor&quot;:null,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;initialCalc&quot;:{&quot;editor&quot;:null,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;}}">class Component extends (window.CalcCore ? window.CalcCore.base(DCLogic) : DCLogic) {
+  static PAD = [
+    { k: 'ac', t: 'AC', fg: 'var(--muted)', bg: 'var(--key)', s: 1 },
+    { k: 'back', t: '⌫', fg: 'var(--muted)', bg: 'var(--key)', s: 1 },
+    { k: '%', t: '%', fg: 'var(--muted)', bg: 'var(--key)', s: 1 },
+    { k: '÷', t: '÷', fg: 'var(--accent)', bg: 'var(--key)', s: 1 },
+    { k: '7', t: '7', fg: 'var(--text)', bg: 'transparent', s: 1 },
+    { k: '8', t: '8', fg: 'var(--text)', bg: 'transparent', s: 1 },
+    { k: '9', t: '9', fg: 'var(--text)', bg: 'transparent', s: 1 },
+    { k: '×', t: '×', fg: 'var(--accent)', bg: 'var(--key)', s: 1 },
+    { k: '4', t: '4', fg: 'var(--text)', bg: 'transparent', s: 1 },
+    { k: '5', t: '5', fg: 'var(--text)', bg: 'transparent', s: 1 },
+    { k: '6', t: '6', fg: 'var(--text)', bg: 'transparent', s: 1 },
+    { k: '−', t: '−', fg: 'var(--accent)', bg: 'var(--key)', s: 1 },
+    { k: '1', t: '1', fg: 'var(--text)', bg: 'transparent', s: 1 },
+    { k: '2', t: '2', fg: 'var(--text)', bg: 'transparent', s: 1 },
+    { k: '3', t: '3', fg: 'var(--text)', bg: 'transparent', s: 1 },
+    { k: '+', t: '+', fg: 'var(--accent)', bg: 'var(--key)', s: 1 },
+    { k: '0', t: '0', fg: 'var(--text)', bg: 'transparent', s: 1 },
+    { k: '.', t: '.', fg: 'var(--text)', bg: 'transparent', s: 1 },
+    { k: '=', t: '=', fg: 'var(--accent-ink)', bg: 'var(--accent)', s: 2 }
+  ];
+  static SCI = ['sin(', 'cos(', 'tan(', 'ln(', 'log(', '√(', 'x²', '^', '(', ')', 'π', 'ℯ', 'n!', '1/x', 'mod'].map(function (t) {
+    return { k: t, t: t };
+  });
+  evaluate(expr, deg) {
+    let s = expr;
+    if (!s.trim()) return null;
+    const open = (s.match(/\(/g) || []).length - (s.match(/\)/g) || []).length;
+    if (open > 0) s += ')'.repeat(open);
+    s = s.replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-')
+      .replace(/π/g, '(Math.PI)').replace(/ℯ/g, '(Math.E)')
+      .replace(/sin\(/g, 'S(').replace(/cos\(/g, 'C(').replace(/tan\(/g, 'T(')
+      .replace(/log\(/g, 'L(').replace(/ln\(/g, 'N(').replace(/√\(/g, 'Q(')
+      .replace(/\^/g, '**').replace(/mod/g, '%');
+    s = s.replace(/(\d+(?:\.\d+)?)!/g, 'F($1)');
+    const probe = s
+      .replace(/Math\.(PI|E)/g, '1')
+      .replace(/(\d)[eE]([+-]?\d)/g, '$1 $2')
+      .replace(/[SCTLNQF]/g, '');
+    if (/[a-zA-Z]/.test(probe)) return 'Error';
+    const k = deg ? Math.PI / 180 : 1;
+    try {
+      const fn = new Function('S', 'C', 'T', 'L', 'N', 'Q', 'F', 'return (' + s + ')');
+      const r = fn(
+        (x) => Math.sin(x * k), (x) => Math.cos(x * k), (x) => Math.tan(x * k),
+        (x) => Math.log10(x), (x) => Math.log(x), (x) => Math.sqrt(x),
+        (x) => { if (x < 0 || x % 1 !== 0 || x > 170) return NaN; let o = 1; for (let j = 2; j <= x; j++) o *= j; return o; }
+      );
+      if (typeof r !== 'number' || !isFinite(r)) return 'Error';
+      const big = Math.abs(r) >= 1e15;
+      const rounded = big ? r : Math.round(r * 1e10) / 1e10;
+      if (!isFinite(rounded)) return 'Error';
+      return big ? rounded.toExponential(10) : String(rounded);
+    } catch (e) { return 'Error'; }
+  }
+  press(k) {
+    const p = Object.assign({}, this.state.pad);
+    const sci = this.state.calc === 'scientific';
+    if (k === 'ac') { this.save({ pad: Object.assign(p, { expr: '', out: '0', fresh: true }) }); return; }
+    if (k === 'back') { p.expr = p.expr.slice(0, -1); p.fresh = false; this.save({ pad: p }); return; }
+    if (k === '=') {
+      const r = this.evaluate(p.expr, p.deg);
+      if (r == null) return;
+      const ok = r !== 'Error' && isFinite(Number(r));
+      const h = [{ expr: p.expr, out: r }].concat(this.state.history || []).slice(0, 24);
+      this.save({ pad: Object.assign(p, { out: r, expr: ok ? r : p.expr, fresh: true }), history: ok ? h : this.state.history });
+      return;
+    }
+    if (k === '1/x') {
+      /* reciprocal wraps what is already there — appending "1/" produced nonsense like 51/ */
+      const inner = p.expr.trim() ? p.expr : p.out;
+      p.expr = '1/(' + inner + ')';
+      p.fresh = false;
+      const rec = this.evaluate(p.expr, p.deg);
+      p.out = rec && rec !== 'Error' ? rec : p.out;
+      this.save({ pad: p });
+      return;
+    }
+    let add = k;
+    if (k === 'x²') add = '^2';
+    else if (k === 'n!') add = '!';
+    else if (k === '%' && !sci) add = '/100';
+    else if (k === 'mod') add = ' mod ';
+    if (p.fresh && /[0-9.]/.test(k)) p.expr = '';
+    p.fresh = false;
+    p.expr = p.expr + add;
+    const live = this.evaluate(p.expr, p.deg);
+    p.out = live && live !== 'Error' ? live : p.out;
+    this.save({ pad: p });
+  }
+  keyDown(e) {
+    const c = Component.CALCS.find((x) => x.id === this.state.calc);
+    if (!c || c.kind !== 'pad') return;
+    const t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    if (this.embedded) {
+      const inside = !!(t && t.closest && t.closest('[data-r="shell-root"]'));
+      if (!inside && !this._engaged) return;
+    }
+    if (t && t.closest) {
+      if (t.closest('a, select')) return;
+      if (t.closest('button') && (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar')) return;
+    }
+    const k = e.key;
+    if (/^[0-9.]$/.test(k)) this.press(k);
+    else if (k === '+') this.press('+');
+    else if (k === '-') this.press('−');
+    else if (k === '*') this.press('×');
+    else if (k === '/') { e.preventDefault(); this.press('÷'); }
+    else if (k === '(' || k === ')') this.press(k);
+    else if (k === '^') this.press('^');
+    else if (k === 'Enter' || k === '=') { e.preventDefault(); this.press('='); }
+    else if (k === 'Backspace') { e.preventDefault(); this.press('back'); }
+    else if (k === 'Escape') this.press('ac');
+    else return;
+  }
+}</script>
+</body>
+</html>

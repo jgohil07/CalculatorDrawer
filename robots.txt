@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# The app's JS must stay crawlable — Googlebot renders it to see each calculator.
+Disallow: /Calculator%20Drawer.dc.html
+
+Sitemap: https://jgohil07.github.io/CalculatorDrawer/sitemap.xml

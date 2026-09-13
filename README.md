@@ -55,9 +55,6 @@ Then open http://localhost:8000/
 `.nojekyll` is committed so Jekyll does not touch the file tree. `sitemap.xml` and `robots.txt` are
 already pointed at the Pages URL — submit the sitemap in Google Search Console once the site is live.
 
-## Easter egg
-
-There is one. Two ways in, both on the front page.
 
 ## About
 

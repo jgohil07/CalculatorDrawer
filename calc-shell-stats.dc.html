@@ -17,6 +17,13 @@
 :root{--bg:#fcfcfd;--panel:#ffffff;--panel-2:#f6f7f9;--input:#f3f4f6;--key:#f7f8f9;--line:#e7e8ec;--line-soft:#eef0f2;--track:#eceef1;--text:#14161a;--muted:#676b74;--accent:#4f57c9;--accent-2:#a4aaf0;--accent-ink:#ffffff;--bg-blur:rgba(252,252,253,.78)}
 [data-theme="dark"]{--bg:#08090a;--panel:#0e0f11;--panel-2:#121316;--input:#16181b;--key:#15171a;--line:#1e2024;--line-soft:#181a1d;--track:#2b2f36;--text:#f4f5f6;--muted:#8b8f98;--accent:#7b86e8;--accent-2:#3a4293;--accent-ink:#0b0c0d;--bg-blur:rgba(8,9,10,.78)}
 *{box-sizing:border-box}
+/* pass the card height down so content fills it instead of leaving a void below */
+[data-r=main]{display:flex;flex-direction:column}
+[data-r=main] > div{flex:1;min-height:0;display:flex;flex-direction:column;width:100%}
+[data-r=grid]{flex:1;min-height:0;align-items:stretch !important}
+[data-r=grid] > div > section:last-child{flex:1}
+[data-r=inputfoot]{margin-top:auto}
+@media (min-width:961px){[data-r=aside]{align-self:flex-start}}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--text)}
 body{font-family:'Instrument Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
@@ -33,10 +40,14 @@ a{color:var(--accent);text-decoration:none}
 a:hover{color:var(--text)}
 ::selection{background:var(--accent);color:var(--accent-ink)}
 textarea{font-family:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+[data-r=nav]{scrollbar-width:none;-ms-overflow-style:none}
+[data-r=nav]::-webkit-scrollbar{display:none}
 @media (max-width:960px){
   [data-r=shell]{flex-direction:column !important}
-  [data-r=aside]{width:100% !important;flex:none !important;flex-direction:row !important;align-items:stretch !important;overflow-x:auto;border-right:0 !important;border-bottom:1px solid var(--line) !important;padding:10px 12px !important;gap:7px !important}
-  [data-r=aside] [data-calc]{flex:0 0 auto !important;min-width:150px !important}
+  [data-r=aside]{width:100% !important;flex:none !important;flex-direction:row !important;flex-wrap:wrap !important;align-items:stretch !important;border-right:0 !important;border-bottom:1px solid var(--line) !important;padding:10px 12px !important;gap:7px !important;background:transparent !important}
+  [data-r=aside] [data-calc]{flex:0 0 auto !important;min-width:0 !important;padding:6px 10px !important;white-space:nowrap !important}
+  [data-r=aside] [data-calc] > span:nth-child(2){display:none !important}
   [data-r=aside-label],[data-r=aside-note]{display:none !important}
   [data-r=main]{padding:24px 18px 56px !important}
   [data-r=grid]{grid-template-columns:minmax(0,1fr) !important}
@@ -106,7 +117,7 @@ textarea{font-family:inherit}
           <span style="font-size:11.5px;color:var(--muted);line-height:1.35">{{ c.desc }}</span>
         </a>
       </sc-for>
-      <div data-r="aside-note" style="margin-top:auto;padding:10px;font-size:11px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line)">Every input is saved in this browser only — nothing leaves your device.</div>
+      <div data-r="aside-note" style="margin-top:14px;padding:10px;font-size:11px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line)">Every input is saved in this browser only — nothing leaves your device.</div>
     </aside>
 
     <main data-r="main" style="flex:1;min-width:0;padding:{{ mainPad }};overflow-x:hidden">

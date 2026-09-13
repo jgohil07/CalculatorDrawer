@@ -89,13 +89,48 @@ footer{border-top:1px solid var(--line);background:var(--panel-2);margin-top:46p
 footer .wrap{font-size:12.5px;color:var(--muted)}
 footer a{color:var(--muted)}
 @media (max-width:960px){.tool{width:calc(100vw - 24px)}}footer .wrap{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.sig{font-weight:600;color:var(--text);letter-spacing:-.01em;margin:0}
-.sig-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block;margin-right:7px;vertical-align:2px}
 footer .disc{flex:1;min-width:220px;margin:0}
 .alllink{display:flex;align-items:center;gap:7px;padding:6px 11px;border:1px solid var(--line);border-radius:7px;font-size:12.5px;font-weight:500;color:var(--muted);background:var(--panel);white-space:nowrap;flex:none}
 .alllink:hover{color:var(--text);border-color:var(--accent)}
 .alllink svg{display:block;flex:none}
 @media (max-width:760px){.alllink span{display:none}}
+.tool{display:flex;min-height:calc(100dvh - 138px)}
+.tool > x-dc{flex:1;min-width:0;display:flex;flex-direction:column}
+.tool [data-r="shell-root"]{flex:1}
+html[data-view=compact] .tool{display:block;min-height:420px}
+html[data-view=compact] [data-r=main]{padding:16px 16px 22px !important}
+html[data-view=compact] [data-r=aside]{padding:10px 9px !important}
+html[data-view=compact] [data-r=grid]{gap:14px !important}
+.viewbtn{display:flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid var(--line);border-radius:7px;background:none;font:inherit;font-size:12px;color:var(--muted);cursor:pointer;flex:none}
+.viewbtn:hover{color:var(--text)}
+.viewbtn svg{display:block}
+@media (max-width:700px){.viewbtn span{display:none}.tool{min-height:calc(100dvh - 120px)}}
+nav.cats{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+nav.cats::-webkit-scrollbar{display:none}
+@media (max-width:1100px){.viewbtn span,.theme span{display:none}}
+html[data-view=full] [data-r=grid]{align-items:stretch !important}
+.tool + h2{margin-top:26px}
+details{border-top:1px solid var(--line-soft);padding:0}
+details summary{cursor:pointer;list-style:none;padding:12px 2px;font-size:13.5px;font-weight:500;color:var(--muted);display:flex;align-items:center;gap:8px}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:'+';margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:14px}
+details[open] summary::after{content:'\2212'}
+details summary:hover{color:var(--text)}
+details .body{padding:2px 2px 18px;font-size:14.5px}
+details .body h3{margin:16px 0 4px}
+details .body p:last-child,details .body ul:last-child{margin-bottom:0}
+.readmore{margin:0}
+.tool + .readmore{margin-top:22px}
+details summary h2{font:inherit;margin:0;display:inline;letter-spacing:inherit}
+/* the card sizes to its content — a forced viewport height left empty bands */
+.tool{min-height:0 !important}
+html[data-view=compact] .tool{display:flex !important}
+html[data-view=compact] [data-r=aside]{padding:8px 10px !important;gap:5px !important}
+html[data-view=compact] [data-r=aside] [data-calc]{padding:5px 9px !important}
+html[data-view=compact] [data-r=aside] [data-calc] > span:nth-child(2){display:none !important}
+html[data-view=compact] [data-r=grid]{gap:12px !important}
+html[data-view=compact] [data-r=grid] > div > section{padding:14px 15px !important}
+html[data-view=compact] [data-r=hero]{font-size:26px !important}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
@@ -103,36 +138,49 @@ footer .disc{flex:1;min-width:220px;margin:0}
 {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Calculator Drawer","item":"index.html"},{"@type":"ListItem","position":2,"name":"Everyday"},{"@type":"ListItem","position":3,"name":"Scientific Calculator"}]},
 {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it work in degrees or radians?","acceptedAnswer":{"@type":"Answer","text":"Both. The DEG/RAD button on the display switches between them and your choice is remembered."}},{"@type":"Question","name":"What is the largest number it handles?","acceptedAnswer":{"@type":"Answer","text":"Up to roughly 1.8 × 10³⁰⁸, the limit of double-precision floating point. Larger results return an error rather than infinity."}},{"@type":"Question","name":"Do I need to close my brackets?","acceptedAnswer":{"@type":"Answer","text":"No. Any brackets left open when you press equals are closed automatically."}}]}]}
 </script>
+<script>try{document.documentElement.dataset.view=localStorage.getItem('calcdrawer.view')||'full';}catch(e){document.documentElement.dataset.view='full';}</script>
 </head>
 <body>
 <header><div class="wrap">
-<a class="brand" href="./"><span class="mark">&#8721;</span>Calculator Drawer</a>
+<a class="brand" href="index.html"><span class="mark">&#8721;</span>Calculator Drawer</a>
 <nav class="cats" aria-label="Categories">
-<a href="./" data-cat="everyday" aria-current="page">Everyday</a><a href="loan-emi-calculator.html" data-cat="loans-credit">Loans &amp; Credit</a><a href="sip-calculator.html" data-cat="investing">Investing</a><a href="income-tax-calculator.html" data-cat="planning-tax">Planning &amp; Tax</a>
+<a href="index.html" data-cat="everyday" aria-current="page">Everyday</a><a href="loan-emi-calculator.html" data-cat="loans-credit">Loans &amp; Credit</a><a href="sip-calculator.html" data-cat="investing">Investing</a><a href="income-tax-calculator.html" data-cat="planning-tax">Planning &amp; Tax</a>
 </nav>
 <a class="alllink" href="calculators.html" title="All 32 calculators"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>All 32</span></a>
 <div class="ctl">
 <div class="cur" role="group" aria-label="Currency"><button type="button" data-cur="$" aria-pressed="true">$</button><button type="button" data-cur="&#8377;" aria-pressed="false">&#8377;</button><button type="button" data-cur="&#8364;" aria-pressed="false">&#8364;</button><button type="button" data-cur="&#163;" aria-pressed="false">&#163;</button></div>
+<button type="button" class="viewbtn" title="Switch between comfortable and compact density" aria-pressed="false"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5.5A1.5 1.5 0 0 1 5.5 4H9M15 4h3.5A1.5 1.5 0 0 1 20 5.5V9M20 15v3.5A1.5 1.5 0 0 1 18.5 20H15M9 20H5.5A1.5 1.5 0 0 1 4 18.5V15"/></svg><span>Compact</span></button>
 <button type="button" class="theme" title="Toggle theme" aria-label="Toggle light or dark theme"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span>Theme</span></button>
 </div>
 </div></header>
 <main class="wrap">
-<p class="crumb"><a href="./">Calculator Drawer</a> &rsaquo; Everyday</p>
+<p class="crumb"><a href="index.html">Calculator Drawer</a> &rsaquo; Everyday</p>
 <h1>Scientific Calculator</h1>
 <div class="tool"><x-dc><dc-import name="calc-shell-pad" embedded="true" initial-calc="scientific" hint-size="100%,900px"></dc-import></x-dc><div class="skel" aria-hidden="true"><span></span><span></span><span></span></div></div>
-<p class="toolnote">Everything you type stays in your own browser — no account, no upload. <a href="Calculator%20Drawer.dc.html#scientific">Open in full screen</a>.</p>
-<h2>About this calculator</h2>
+<div class="readmore">
+<details><summary><h2>About this calculator</h2></summary>
+<div class="body">
 <p class="lede">Expression-based scientific calculation: type the whole thing out, brackets and all, and it evaluates in one pass. Trigonometry works in degrees or radians, and unclosed brackets are closed for you.</p>
-
-<h2>How to use it</h2>
+</div>
+</details>
+<details><summary><h2>How to use it</h2></summary>
+<div class="body">
 <ul><li>Functions available: sin, cos, tan, ln, log, √, powers via <code>^</code>, factorial via <code>n!</code>, reciprocal, modulo, π and ℯ.</li><li>Toggle DEG/RAD in the top-right of the display — sin(30) is 0.5 in degrees, −0.988 in radians.</li><li>Results above 10¹⁵ switch to exponential notation and can still be used in the next calculation.</li><li>Factorials are exact up to 170!; beyond that the result exceeds what a double can hold and returns an error.</li></ul>
-<h2 id="faq">Questions</h2>
+</div>
+</details>
+<details id="faq"><summary><h2>Questions</h2></summary>
+<div class="body">
 <div class="faq"><h3>Does it work in degrees or radians?</h3><p>Both. The DEG/RAD button on the display switches between them and your choice is remembered.</p><h3>What is the largest number it handles?</h3><p>Up to roughly 1.8 × 10³⁰⁸, the limit of double-precision floating point. Larger results return an error rather than infinity.</p><h3>Do I need to close my brackets?</h3><p>No. Any brackets left open when you press equals are closed automatically.</p></div>
-<h2>Related calculators</h2>
-<ul class="rel"><li><a href="./">Calculator</a></li><li><a href="programmer-calculator.html">Programmer Calculator</a></li><li><a href="statistics-calculator.html">Statistical Calculator</a></li></ul>
+</div>
+</details>
+<details><summary><h2>Related calculators</h2></summary>
+<div class="body">
+<ul class="rel"><li><a href="index.html">Calculator</a></li><li><a href="programmer-calculator.html">Programmer Calculator</a></li><li><a href="statistics-calculator.html">Statistical Calculator</a></li></ul>
+</div>
+</details>
+</div>
 </main>
 <footer><div class="wrap">
-<p class="sig"><span class="sig-dot"></span>Build by Jay</p>
 <p class="disc">32 calculators, all running locally in your browser. Figures are indicative and for general guidance only, not financial or tax advice.</p>
 <p><a href="calculators.html">All calculators</a></p>
 </div></footer>
@@ -195,5 +243,23 @@ footer .disc{flex:1;min-width:220px;margin:0}
  document.addEventListener('touchstart',onHover,{passive:true});
 })();
 </script>
+<script>
+(function(){
+ var K='calcdrawer.view',h=document.documentElement,b=document.querySelector('.viewbtn');
+ function apply(v){
+  h.dataset.view=v;
+  if(!b)return;
+  b.setAttribute('aria-pressed',String(v==='compact'));
+  b.querySelector('span').textContent=v==='compact'?'Comfortable':'Compact';
+ }
+ apply(h.dataset.view==='compact'?'compact':'full');
+ if(b)b.addEventListener('click',function(){
+  var v=h.dataset.view==='compact'?'full':'compact';
+  try{localStorage.setItem(K,v);}catch(e){}
+  apply(v);
+ });
+})();
+</script>
+<script src="calc-egg.js" defer></script>
 </body>
 </html>

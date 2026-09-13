@@ -58,6 +58,10 @@ Then open http://localhost:8000/
 `.nojekyll` is committed so Jekyll does not touch the file tree. `sitemap.xml` and `robots.txt` are
 already pointed at the Pages URL — submit the sitemap in Google Search Console once the site is live.
 
+## Easter egg
+
+There is one. Two ways in, both on the front page.
+
 ## Disclaimer
 
 Figures are indicative and for general guidance only. Nothing here is financial, investment or tax
@@ -65,4 +69,4 @@ advice. Tax logic excludes state professional tax variations and case-specific r
 
 ---
 
-Build by Jay
+From indie dev Jay

@@ -26,7 +26,7 @@ Resumable checkpoint. Read this first in a new session.
       deliberately NOT done — inlined critical CSS is faster on first paint, which is the priority.
 - [x] **Step 2 — audit + fixes** (see "Defects fixed" below)
 - [x] **Step 3 — footer signature** ("Build by Jay" on all 33 pages)
-- [ ] **Step 4 — design confirmation with user**
+- [x] **Step 4 — design reviewed with user across several rounds of fixes**
 - [ ] **Step 5 — push to GitHub + enable Pages** (BLOCKED: the GitHub integration here is read-only;
       needs user to push, or a download hand-off. See "Publishing" below.)
 
@@ -82,6 +82,58 @@ Privacy scan: no emails, keys, tokens, analytics, external beacons or personal d
 tree. All state is localStorage under one key (`calcstudio.v2`); the only network requests are Google
 Fonts.
 
+## Category strip / empty-bar saga (resolved)
+
+The "empty bar" under the calculator was the category strip, and it took several wrong turns:
+hiding its scrollbar, auto-centering the active item, and an absolutely-positioned pane — all
+reverted. Root cause was that the strip overflowed and wrapped, leaving a filled band of dead space.
+
+Final state (all four shells, <=960px):
+- strip wraps (`flex-wrap:wrap`), does NOT scroll — no `overflow-x`, no hidden scrollbars, no fade
+- per-item descriptions hidden (`[data-calc] > span:nth-child(2)`) so only names show
+- chips at natural width, `padding:6px 10px` — all categories now fit ONE row at >=900px
+- strip background transparent so it cannot read as a filled band
+- >=961px: `[data-r=aside]{align-self:flex-start}` so the pane no longer stretches the card
+
+Verified by screenshot on Everyday (9 items), Loans & Credit (8), Planning & Tax (7, longest names).
+
+### Forced card height (final fix)
+
+`.tool{min-height:calc(100dvh - 138px)}` was the real source of the "empty bar in full height".
+On desktop it forced a ~900px card around ~300px of calculator, so the category pane ended
+mid-card and the rest was empty panel. Now `.tool{min-height:0}` on all 32 tool pages — the card
+sizes to its content (measured 900px -> 504px, empty space under the pane 390px -> 1px).
+
+The header control is therefore a DENSITY toggle, labelled "Comfortable" / "Compact" (not
+"Full height") so it describes what it does. Compact tightens main padding, grid gap, card padding,
+pane padding and hero size, and hides the pane item descriptions: 653px -> 572px on Loan EMI.
+
+## Easter egg (new work)
+
+- [x] Footer signature removed from all 33 pages (README still credits Jay).
+- [x] Splash: user picked **C, the keycap** (`easter-egg-c.html` kept as the design reference;
+      a/b/d deleted). Wording "Jay / 21 + 26 · indie dev".
+- [x] Implemented as `calc-egg.js`, loaded on all 33 pages, dormant until triggered:
+      - `21 + 26 =` on the Simple Calculator only. Matched as `p.expr === '21+26'` at the `=`
+        branch — an EXACT expression match. (A rolling key-tail match was tried first and fired on
+        any n…21 + 26, e.g. 121+26 and 521+26, covering a legitimate result. Instance state was
+        tried before that and never fired at all: the DC logic instance does not survive re-render.)
+        The sum still returns 47 and still logs to history; the splash rides on top.
+      - the header ∑ mark sits inside the brand link. Navigation is DEFERRED 400ms and cancelled
+        if another tap arrives, AND the tap run is kept in `sessionStorage.calcdrawer.taps` so it
+        survives any navigation that does happen. A lone click still goes home; rapid taps never
+        navigate at all; slow taps navigate but keep counting on the next page.
+        Three wrong turns before this: blocking the default outright killed the logo's home link
+        on all 32 inner pages; blocking only after tap 1 made the trigger unreachable (tap 1
+        navigated away); and the sessionStorage helpers were declared with `var` AFTER the boot
+        check that called them, so `KEY` was undefined and boot read `sessionStorage[undefined]`.
+      - the caption is a heart glyph + "INDIE DEV" (the 21 + 26 hint was removed at user request).
+      - five taps on the header ∑ mark within 3s, any page (the currency picker keeps its own job)
+      - full-screen over the page, auto-fades after 3s, click or Esc closes early, repeatable
+        with no limit, honours prefers-reduced-motion
+- [x] Verified live: both triggers fire, answer 47 still shows, auto-fade at 3s, Esc/click closes.
+- [ ] Re-push to GitHub (see Publishing below).
+
 ## Publishing (Step 5 constraint)
 
 The GitHub tools available in this environment can read a repo but cannot commit or create one.
@@ -98,5 +150,5 @@ Files that must be at repo root: all `*.html`, `calc-core.js`, `calc-route-*.js`
 ## Notes for the next session
 
 - Route chunks execute inside an IIFE receiving `Component`; shells define their own statics (PAD, SCI).
-- `Component.PAGES.simple` is now `'./'` — inline `PAGES` maps in each page's footer script match.
+- `Component.PAGES.simple` is now `'index.html'` — inline `PAGES` maps in each page's footer script match.
 - Every page's inline script wires currency/theme via `window.__calcDrawer`.

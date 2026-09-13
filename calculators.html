@@ -63,10 +63,13 @@ p{margin:0 0 12px;text-wrap:pretty}
 footer{border-top:1px solid var(--line);background:var(--panel-2);margin-top:40px;padding:20px 0 26px}
 footer .wrap{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
 footer a{color:var(--muted)}
-.sig{font-weight:600;color:var(--text);letter-spacing:-.01em}
-.sig-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block;margin-right:7px;vertical-align:2px}
 footer .disc{flex:1;min-width:220px}
-@media (max-width:700px){nav.cats{display:none}.wrap{padding-left:14px;padding-right:14px}}</style>
+@media (max-width:700px){nav.cats{display:none}.wrap{padding-left:14px;padding-right:14px}}nav.cats{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+nav.cats::-webkit-scrollbar{display:none}
+@media (max-width:1100px){.viewbtn span,.theme span{display:none}}
+html[data-view=full] [data-r=grid]{align-items:stretch !important}
+.tool + h2{margin-top:26px}
+</style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"CollectionPage","name":"All 32 calculators","url":"https://jgohil07.github.io/CalculatorDrawer/calculators.html","isPartOf":{"@type":"WebSite","@id":"https://jgohil07.github.io/CalculatorDrawer/#site"}},
@@ -76,7 +79,7 @@ footer .disc{flex:1;min-width:220px}
 </head>
 <body>
 <header><div class="wrap">
-<a class="brand" href="./"><span class="mark">&#8721;</span>Calculator Drawer</a>
+<a class="brand" href="index.html"><span class="mark">&#8721;</span>Calculator Drawer</a>
 <span class="spacer"></span>
 <nav class="cats" aria-label="Categories">
 <a href="#everyday">Everyday</a><a href="#loans-credit">Loans &amp; Credit</a><a href="#investing">Investing</a><a href="#planning-tax">Planning &amp; Tax</a>
@@ -89,7 +92,7 @@ footer .disc{flex:1;min-width:220px}
 <div class="search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" id="q" placeholder="Search calculators&hellip;" aria-label="Search calculators" autocomplete="off" /></div>
 </div>
 <section class="sec"><h2 id="everyday">Everyday</h2>
-<ul class="grid"><li><a href="./"><strong>Calculator</strong><span>Four functions, keyboard entry, saved history</span></a></li><li><a href="scientific-calculator.html"><strong>Scientific Calculator</strong><span>Trigonometry, logs, powers and factorials</span></a></li><li><a href="percentage-calculator.html"><strong>Percentage Calculator</strong><span>Percentage of, share of, and change between</span></a></li><li><a href="unit-converter.html"><strong>Unit Converter</strong><span>Length, mass, volume, area, speed, data, temperature</span></a></li><li><a href="age-calculator.html"><strong>Date &amp; Age Calculator</strong><span>Exact age, or the gap between two dates</span></a></li><li><a href="bmi-calculator.html"><strong>BMI Calculator</strong><span>Body mass index and your healthy weight range</span></a></li><li><a href="fuel-cost-calculator.html"><strong>Fuel Cost Calculator</strong><span>Cost per km, per trip and per month</span></a></li><li><a href="programmer-calculator.html"><strong>Programmer Calculator</strong><span>Base conversion, bit flipping and bitwise ops</span></a></li><li><a href="statistics-calculator.html"><strong>Statistical Calculator</strong><span>Mean, median, mode, deviation and quartiles</span></a></li></ul></section>
+<ul class="grid"><li><a href="index.html"><strong>Calculator</strong><span>Four functions, keyboard entry, saved history</span></a></li><li><a href="scientific-calculator.html"><strong>Scientific Calculator</strong><span>Trigonometry, logs, powers and factorials</span></a></li><li><a href="percentage-calculator.html"><strong>Percentage Calculator</strong><span>Percentage of, share of, and change between</span></a></li><li><a href="unit-converter.html"><strong>Unit Converter</strong><span>Length, mass, volume, area, speed, data, temperature</span></a></li><li><a href="age-calculator.html"><strong>Date &amp; Age Calculator</strong><span>Exact age, or the gap between two dates</span></a></li><li><a href="bmi-calculator.html"><strong>BMI Calculator</strong><span>Body mass index and your healthy weight range</span></a></li><li><a href="fuel-cost-calculator.html"><strong>Fuel Cost Calculator</strong><span>Cost per km, per trip and per month</span></a></li><li><a href="programmer-calculator.html"><strong>Programmer Calculator</strong><span>Base conversion, bit flipping and bitwise ops</span></a></li><li><a href="statistics-calculator.html"><strong>Statistical Calculator</strong><span>Mean, median, mode, deviation and quartiles</span></a></li></ul></section>
 <section class="sec"><h2 id="loans-credit">Loans &amp; Credit</h2>
 <ul class="grid"><li><a href="loan-emi-calculator.html"><strong>Loan EMI Calculator</strong><span>Monthly instalment with year-by-year amortisation</span></a></li><li><a href="mortgage-calculator.html"><strong>Mortgage Calculator</strong><span>Full payment including tax, insurance and upkeep</span></a></li><li><a href="car-loan-calculator.html"><strong>Car Loan Calculator</strong><span>On-road price and trade-in through to an EMI</span></a></li><li><a href="refinance-calculator.html"><strong>Refinance Break-Even Calculator</strong><span>Whether a lower rate beats the switching fee</span></a></li><li><a href="loan-prepayment-calculator.html"><strong>Loan Prepayment Calculator</strong><span>Interest saved and years cut by paying extra</span></a></li><li><a href="credit-card-payoff-calculator.html"><strong>Credit Card Payoff Calculator</strong><span>Months to clear a balance, and its real cost</span></a></li><li><a href="simple-interest-calculator.html"><strong>Simple Interest Calculator</strong><span>Flat interest, compared against compounding</span></a></li><li><a href="compound-interest-calculator.html"><strong>Compound Interest Calculator</strong><span>Any compounding frequency, with effective yield</span></a></li></ul></section>
 <section class="sec"><h2 id="investing">Investing</h2>
@@ -103,9 +106,8 @@ footer .disc{flex:1;min-width:220px}
 </div>
 </main>
 <footer><div class="wrap">
-<p class="sig"><span class="sig-dot"></span>Build by Jay</p>
 <p class="disc">32 calculators, all running locally in your browser. Figures are indicative and for general guidance only, not financial or tax advice.</p>
-<p><a href="./">Calculator</a></p>
+<p><a href="index.html">Calculator</a></p>
 </div></footer>
 <script>
 (function(){
@@ -133,5 +135,6 @@ footer .disc{flex:1;min-width:220px}
  document.addEventListener('touchstart',onHover,{passive:true});
 })();
 </script>
+<script src="calc-egg.js" defer></script>
 </body>
 </html>

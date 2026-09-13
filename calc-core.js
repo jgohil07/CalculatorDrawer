@@ -1,3 +1,5 @@
+/* one-time cleanup: the v1 key was superseded when zero-start defaults landed */
+try { localStorage.removeItem('calcstudio.v1'); } catch (e) {}
 /* Calculator Drawer — shared core chunk. Cached once, reused by all 32 pages.
    Per-route field defs + compute live in calc-route-<slug>.js (~1-3 KB each). */
 window.CalcCore = { base: function (DCLogic) {
@@ -238,7 +240,7 @@ window.CalcCore = { base: function (DCLogic) {
   }
 
   static PAGES = {
-    'simple': './', 'scientific': 'scientific-calculator.html',
+    'simple': 'index.html', 'scientific': 'scientific-calculator.html',
     'percentage': 'percentage-calculator.html', 'unit-converter': 'unit-converter.html',
     'date-age': 'age-calculator.html', 'bmi': 'bmi-calculator.html',
     'fuel-cost': 'fuel-cost-calculator.html', 'programmer': 'programmer-calculator.html',
@@ -444,6 +446,7 @@ window.CalcCore = { base: function (DCLogic) {
       isForm: isForm, isPad: isPad, isProg: kind === 'prog', isStats: kind === 'stats', isSci: active.id === 'scientific',
       fields: fields,
       heroLabel: res ? res.hero.l : '', heroValue: res ? res.hero.v : '', heroSub: res ? res.hero.sub : '',
+      hasResult: !!(isForm && computed && !blank),
       hasSplit: !!split,
       donut: split ? 'conic-gradient(var(--accent) 0 ' + pct + '%, var(--accent-2) ' + pct + '% 100%)' : accentBg,
       splitPctText: split ? Math.round(pct) + '%' : '',

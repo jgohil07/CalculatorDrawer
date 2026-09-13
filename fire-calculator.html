@@ -155,7 +155,7 @@ html[data-view=full] footer .wrap{max-width:none}
 }
 /* compact keeps content-height cards, as before */
 html[data-view=compact] [data-r=grid]{align-items:start !important}
-</style>
+@view-transition{navigation:auto}header{view-transition-name:site-header}@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}</style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"SoftwareApplication","name":"FIRE Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any modern browser","description":"Calculate the corpus that would cover your spending indefinitely and how many years of saving stand between you and it.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},
@@ -163,6 +163,9 @@ html[data-view=compact] [data-r=grid]{align-items:start !important}
 {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is FIRE?","acceptedAnswer":{"@type":"Answer","text":"Financial Independence, Retire Early — building enough invested capital that withdrawals can cover your living costs indefinitely."}},{"@type":"Question","name":"Is the 4% rule reliable?","acceptedAnswer":{"@type":"Answer","text":"It comes from US historical data over 30-year windows and is a reasonable starting point, not a guarantee. Longer retirements and other markets argue for 3–3.5%."}},{"@type":"Question","name":"Why does cutting spending matter more than earning more?","acceptedAnswer":{"@type":"Answer","text":"Because it moves both sides at once — a lower target and a higher savings rate. Reducing annual spending by 10% cuts the required corpus by 10% too."}}]}]}
 </script>
 <script>try{document.documentElement.dataset.view=localStorage.getItem('calcdrawer.view')||'full';}catch(e){document.documentElement.dataset.view='full';}</script>
+<script type="speculationrules">
+{"prerender":[{"where":{"selector_matches":"a[href$=\".html\"]"},"eagerness":"moderate"}]}
+</script>
 </head>
 <body>
 <header><div class="wrap">
@@ -262,7 +265,7 @@ html[data-view=compact] [data-r=grid]{align-items:start !important}
  if(!wire())window.__calcDrawerReady=wire;
  var seen={};
  function pf(u){if(!u||u.charAt(0)==='#'||seen[u])return;seen[u]=1;var l=document.createElement('link');l.rel='prefetch';l.href=u;document.head.appendChild(l);}
- function onHover(e){var t=e.target;if(!t||!t.closest)return;var a=t.closest('a[href$=".html"]');if(a)pf(a.getAttribute('href'));}
+ var hasSpec=!!(window.HTMLScriptElement&&HTMLScriptElement.supports&&HTMLScriptElement.supports('speculationrules'));function onHover(e){if(hasSpec)return;var t=e.target;if(!t||!t.closest)return;var a=t.closest('a[href$=".html"]');if(a)pf(a.getAttribute('href'));}
  document.addEventListener('pointerover',onHover,{passive:true});
  document.addEventListener('touchstart',onHover,{passive:true});
 })();

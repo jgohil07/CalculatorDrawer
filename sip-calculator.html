@@ -155,7 +155,7 @@ html[data-view=full] footer .wrap{max-width:none}
 }
 /* compact keeps content-height cards, as before */
 html[data-view=compact] [data-r=grid]{align-items:start !important}
-</style>
+@view-transition{navigation:auto}header{view-transition-name:site-header}@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}</style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"SoftwareApplication","name":"SIP Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any modern browser","description":"Calculate the maturity value of a monthly SIP, with optional annual step-up. See total invested, estimated returns and year-by-year growth.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},
@@ -163,6 +163,9 @@ html[data-view=compact] [data-r=grid]{align-items:start !important}
 {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a SIP?","acceptedAnswer":{"@type":"Answer","text":"A Systematic Investment Plan — a fixed amount invested at regular intervals, usually monthly, rather than as a lumpsum."}},{"@type":"Question","name":"What return should I assume?","acceptedAnswer":{"@type":"Answer","text":"Equity funds have historically returned around 10–13% annualised over long periods in many markets, but with wide variation. Use a conservative figure and treat the result as a range."}},{"@type":"Question","name":"Is a step-up SIP worth it?","acceptedAnswer":{"@type":"Answer","text":"Usually yes. Raising the amount 10% a year roughly tracks income growth and materially increases the final corpus for little felt pain."}}]}]}
 </script>
 <script>try{document.documentElement.dataset.view=localStorage.getItem('calcdrawer.view')||'full';}catch(e){document.documentElement.dataset.view='full';}</script>
+<script type="speculationrules">
+{"prerender":[{"where":{"selector_matches":"a[href$=\".html\"]"},"eagerness":"moderate"}]}
+</script>
 </head>
 <body>
 <header><div class="wrap">
@@ -267,7 +270,7 @@ html[data-view=compact] [data-r=grid]{align-items:start !important}
  if(!wire())window.__calcDrawerReady=wire;
  var seen={};
  function pf(u){if(!u||u.charAt(0)==='#'||seen[u])return;seen[u]=1;var l=document.createElement('link');l.rel='prefetch';l.href=u;document.head.appendChild(l);}
- function onHover(e){var t=e.target;if(!t||!t.closest)return;var a=t.closest('a[href$=".html"]');if(a)pf(a.getAttribute('href'));}
+ var hasSpec=!!(window.HTMLScriptElement&&HTMLScriptElement.supports&&HTMLScriptElement.supports('speculationrules'));function onHover(e){if(hasSpec)return;var t=e.target;if(!t||!t.closest)return;var a=t.closest('a[href$=".html"]');if(a)pf(a.getAttribute('href'));}
  document.addEventListener('pointerover',onHover,{passive:true});
  document.addEventListener('touchstart',onHover,{passive:true});
 })();

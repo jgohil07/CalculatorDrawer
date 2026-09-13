@@ -155,7 +155,7 @@ html[data-view=full] footer .wrap{max-width:none}
 }
 /* compact keeps content-height cards, as before */
 html[data-view=compact] [data-r=grid]{align-items:start !important}
-</style>
+@view-transition{navigation:auto}header{view-transition-name:site-header}@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}</style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"SoftwareApplication","name":"Fuel Cost Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any modern browser","description":"Work out what a trip costs to drive and what it adds up to over a month, from distance, fuel efficiency and pump price.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},
@@ -163,6 +163,9 @@ html[data-view=compact] [data-r=grid]{align-items:start !important}
 {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate fuel cost per kilometre?","acceptedAnswer":{"@type":"Answer","text":"Divide the fuel price per litre by your vehicle's efficiency in kilometres per litre. The calculator shows this figure directly."}},{"@type":"Question","name":"Should I use claimed or real-world efficiency?","acceptedAnswer":{"@type":"Answer","text":"Real-world, and preferably your own measured figure. Manufacturer numbers are usually optimistic by 10–20%."}},{"@type":"Question","name":"Does this include other running costs?","acceptedAnswer":{"@type":"Answer","text":"No — fuel only. Tyres, servicing, depreciation and insurance typically add more per kilometre than fuel does."}}]}]}
 </script>
 <script>try{document.documentElement.dataset.view=localStorage.getItem('calcdrawer.view')||'full';}catch(e){document.documentElement.dataset.view='full';}</script>
+<script type="speculationrules">
+{"prerender":[{"where":{"selector_matches":"a[href$=\".html\"]"},"eagerness":"moderate"}]}
+</script>
 </head>
 <body>
 <header><div class="wrap">
@@ -262,7 +265,7 @@ html[data-view=compact] [data-r=grid]{align-items:start !important}
  if(!wire())window.__calcDrawerReady=wire;
  var seen={};
  function pf(u){if(!u||u.charAt(0)==='#'||seen[u])return;seen[u]=1;var l=document.createElement('link');l.rel='prefetch';l.href=u;document.head.appendChild(l);}
- function onHover(e){var t=e.target;if(!t||!t.closest)return;var a=t.closest('a[href$=".html"]');if(a)pf(a.getAttribute('href'));}
+ var hasSpec=!!(window.HTMLScriptElement&&HTMLScriptElement.supports&&HTMLScriptElement.supports('speculationrules'));function onHover(e){if(hasSpec)return;var t=e.target;if(!t||!t.closest)return;var a=t.closest('a[href$=".html"]');if(a)pf(a.getAttribute('href'));}
  document.addEventListener('pointerover',onHover,{passive:true});
  document.addEventListener('touchstart',onHover,{passive:true});
 })();

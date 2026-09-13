@@ -155,7 +155,7 @@ html[data-view=full] footer .wrap{max-width:none}
 }
 /* compact keeps content-height cards, as before */
 html[data-view=compact] [data-r=grid]{align-items:start !important}
-</style>
+@view-transition{navigation:auto}header{view-transition-name:site-header}@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}</style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"SoftwareApplication","name":"Take-Home Salary Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any modern browser","description":"Break an annual CTC into PF, gratuity, income tax and the monthly amount that actually reaches your bank account.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},
@@ -163,6 +163,9 @@ html[data-view=compact] [data-r=grid]{align-items:start !important}
 {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is my take-home so much lower than my CTC?","acceptedAnswer":{"@type":"Answer","text":"Because CTC includes employer PF, gratuity and often insurance — none of which is paid to you — and then income tax and your own PF are deducted."}},{"@type":"Question","name":"What percentage of CTC is take-home?","acceptedAnswer":{"@type":"Answer","text":"Typically 65–80%, depending on the basic-salary proportion, tax slab and how much of the package is variable."}},{"@type":"Question","name":"Is this exact?","acceptedAnswer":{"@type":"Answer","text":"No. It uses standard conventions for PF and gratuity; your offer letter's actual structure will differ. Treat it as an estimate."}}]}]}
 </script>
 <script>try{document.documentElement.dataset.view=localStorage.getItem('calcdrawer.view')||'full';}catch(e){document.documentElement.dataset.view='full';}</script>
+<script type="speculationrules">
+{"prerender":[{"where":{"selector_matches":"a[href$=\".html\"]"},"eagerness":"moderate"}]}
+</script>
 </head>
 <body>
 <header><div class="wrap">
@@ -262,7 +265,7 @@ html[data-view=compact] [data-r=grid]{align-items:start !important}
  if(!wire())window.__calcDrawerReady=wire;
  var seen={};
  function pf(u){if(!u||u.charAt(0)==='#'||seen[u])return;seen[u]=1;var l=document.createElement('link');l.rel='prefetch';l.href=u;document.head.appendChild(l);}
- function onHover(e){var t=e.target;if(!t||!t.closest)return;var a=t.closest('a[href$=".html"]');if(a)pf(a.getAttribute('href'));}
+ var hasSpec=!!(window.HTMLScriptElement&&HTMLScriptElement.supports&&HTMLScriptElement.supports('speculationrules'));function onHover(e){if(hasSpec)return;var t=e.target;if(!t||!t.closest)return;var a=t.closest('a[href$=".html"]');if(a)pf(a.getAttribute('href'));}
  document.addEventListener('pointerover',onHover,{passive:true});
  document.addEventListener('touchstart',onHover,{passive:true});
 })();

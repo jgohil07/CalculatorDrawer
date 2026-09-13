@@ -155,7 +155,7 @@ html[data-view=full] footer .wrap{max-width:none}
 }
 /* compact keeps content-height cards, as before */
 html[data-view=compact] [data-r=grid]{align-items:start !important}
-</style>
+@view-transition{navigation:auto}header{view-transition-name:site-header}@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}</style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"SoftwareApplication","name":"FD & RD Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any modern browser","description":"Calculate maturity value for a fixed deposit or recurring deposit with quarterly compounding, including tax at your slab and the post-tax effective rate.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},
@@ -163,6 +163,9 @@ html[data-view=compact] [data-r=grid]{align-items:start !important}
 {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is FD interest taxed?","acceptedAnswer":{"@type":"Answer","text":"As ordinary income at your marginal slab rate, accrued annually — not deferred until maturity. At a 30% slab, a 7.1% deposit yields under 5% after tax."}},{"@type":"Question","name":"Is an RD better than an FD?","acceptedAnswer":{"@type":"Answer","text":"Neither is inherently better. An RD suits saving out of monthly income; an FD suits a lumpsum you already have. The FD compounds for longer on the same total."}},{"@type":"Question","name":"Do deposits beat inflation?","acceptedAnswer":{"@type":"Answer","text":"Often barely, after tax. At 5% inflation and a 30% slab, a 7.1% deposit is roughly break-even in real terms."}}]}]}
 </script>
 <script>try{document.documentElement.dataset.view=localStorage.getItem('calcdrawer.view')||'full';}catch(e){document.documentElement.dataset.view='full';}</script>
+<script type="speculationrules">
+{"prerender":[{"where":{"selector_matches":"a[href$=\".html\"]"},"eagerness":"moderate"}]}
+</script>
 </head>
 <body>
 <header><div class="wrap">
@@ -262,7 +265,7 @@ html[data-view=compact] [data-r=grid]{align-items:start !important}
  if(!wire())window.__calcDrawerReady=wire;
  var seen={};
  function pf(u){if(!u||u.charAt(0)==='#'||seen[u])return;seen[u]=1;var l=document.createElement('link');l.rel='prefetch';l.href=u;document.head.appendChild(l);}
- function onHover(e){var t=e.target;if(!t||!t.closest)return;var a=t.closest('a[href$=".html"]');if(a)pf(a.getAttribute('href'));}
+ var hasSpec=!!(window.HTMLScriptElement&&HTMLScriptElement.supports&&HTMLScriptElement.supports('speculationrules'));function onHover(e){if(hasSpec)return;var t=e.target;if(!t||!t.closest)return;var a=t.closest('a[href$=".html"]');if(a)pf(a.getAttribute('href'));}
  document.addEventListener('pointerover',onHover,{passive:true});
  document.addEventListener('touchstart',onHover,{passive:true});
 })();

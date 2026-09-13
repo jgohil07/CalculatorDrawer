@@ -98,6 +98,14 @@ window.CalcCore = { base: function (DCLogic) {
     this.syncMeta(first);
     this._key = (e) => this.keyDown(e);
     window.addEventListener('keydown', this._key);
+    if (document.prerendering) {
+      document.addEventListener('prerenderingchange', () => {
+        if (this._pendingSave != null) {
+          try { localStorage.setItem(Component.KEY, this._pendingSave); } catch (err) { /* storage unavailable */ }
+          this._pendingSave = null;
+        }
+      }, { once: true });
+    }
     window.__calcDrawer = {
       setCurrency: (v) => this.save({ currency: v }),
       setTheme: (t) => { document.documentElement.dataset.theme = t; this.save({ theme: t }); },
@@ -154,7 +162,13 @@ window.CalcCore = { base: function (DCLogic) {
         const lastByCat = Object.assign({}, s.lastByCat || {});
         const activeObj = Component.CALCS.find((x) => x.id === s.calc);
         if (activeObj) lastByCat[s.cat] = Component.slugOf(activeObj);
-        localStorage.setItem(Component.KEY, JSON.stringify({ theme: s.theme, cat: s.cat, calc: s.calc, currency: s.currency, lastByCat: lastByCat, vals: s.vals, history: s.history, pad: s.pad, prog: s.prog, stats: s.stats }));
+        const payload = JSON.stringify({ theme: s.theme, cat: s.cat, calc: s.calc, currency: s.currency, lastByCat: lastByCat, vals: s.vals, history: s.history, pad: s.pad, prog: s.prog, stats: s.stats });
+        /* A prerendered page must not touch storage. Without this, merely hovering
+           a calculator link would rewrite which calculator you last used, because
+           the prerender mounts the component and mounting saves. Hold the write
+           back and flush it if and when the page is actually activated. */
+        if (document.prerendering) this._pendingSave = payload;
+        else localStorage.setItem(Component.KEY, payload);
       } catch (e) { /* storage unavailable */ }
     });
   }

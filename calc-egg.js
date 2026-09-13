@@ -51,12 +51,16 @@
     try { a.length ? sessionStorage.setItem(KEY, JSON.stringify(a)) : sessionStorage.removeItem(KEY); } catch (e) {}
   }
   /* a run whose fifth tap coincided with the navigation it triggered */
-  (function () {
+  function resumeRun() {
     var now = Date.now();
     var taps = readTaps().filter(function (x) { return now - x <= 3000; });
     if (taps.length >= 5) { writeTaps([]); show(); }
     else writeTaps(taps);
-  })();
+  }
+  /* A prerendered page must not consume the tap run or paint the splash into a
+     document nobody is looking at — wait until it is actually activated. */
+  if (document.prerendering) document.addEventListener('prerenderingchange', resumeRun, { once: true });
+  else resumeRun();
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
   /* five taps on the header mark, within three seconds */
   document.addEventListener('click', function (e) {

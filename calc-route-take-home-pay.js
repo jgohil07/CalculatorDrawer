@@ -13,7 +13,7 @@ window.__calcRoute = {
     if (id === 'ctc') {
       const fixedPay = Math.max(v.ctc - (v.bonus || 0), 0);
       const basic = fixedPay * v.basicPct / 100;
-      const pfEmp = Math.min(basic, 1800000) * 0.12;
+      const pfEmp = basic * 0.12;
       const gratuity = basic * 0.0481;
       const nps = basic * (v.nps || 0) / 100;
       const gross = v.ctc - pfEmp - gratuity - nps;

@@ -122,6 +122,23 @@ html[data-view=compact] [data-r=aside] [data-calc] > span:nth-child(2){display:n
 html[data-view=compact] [data-r=grid]{gap:12px !important}
 html[data-view=compact] [data-r=grid] > div > section{padding:14px 15px !important}
 html[data-view=compact] [data-r=hero]{font-size:26px !important}
+
+/* full view: edge to edge, so the shell's own calculator list is the far-left sidebar.
+   Categories stay in the top bar. Compact keeps the centred column. */
+@media (min-width:1000px){
+html[data-view=full] header .wrap{max-width:none}
+html[data-view=full] main.wrap{max-width:none;padding:0}
+/* second bar dropped in full mode only — headings stay in the DOM for search engines */
+html[data-view=full] .h1row,
+html[data-view=full] main.wrap > h1,
+html[data-view=full] main.wrap > .crumb{position:absolute !important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+html[data-view=full] main.wrap{padding-top:14px}
+html[data-view=full] .tool{border-left:0;border-right:0;border-radius:0;margin-bottom:16px;min-height:calc(100dvh - 128px)}
+html[data-view=full] .readmore{padding:0 20px 8px}
+html[data-view=full] footer .wrap{max-width:none}
+}
+/* compact keeps content-height cards, as before */
+html[data-view=compact] [data-r=grid]{align-items:start !important}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[

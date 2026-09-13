@@ -49,6 +49,18 @@ python3 -m http.server 8000
 
 Then open http://localhost:8000/
 
+## Deploying to GitHub Pages
+
+1. Push the contents of this repository to `main` (all files at the repository root).
+2. Settings → Pages → Source: **Deploy from a branch** → Branch: `main`, folder: `/ (root)`.
+3. Wait for the first build, then open https://jgohil07.github.io/CalculatorDrawer/
+
+`.nojekyll` is committed so Jekyll does not touch the file tree. `sitemap.xml` and `robots.txt` are
+already pointed at the Pages URL — submit the sitemap in Google Search Console once the site is live.
+
+## Easter egg
+
+There is one. Two ways in, both on the front page.
 
 ## Disclaimer
 

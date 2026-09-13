@@ -139,8 +139,8 @@ textarea{font-family:inherit}
         </sc-if>
 
         <sc-if value="{{ isForm }}" hint-placeholder-val="{{ true }}">
-          <div data-r="grid" style="display:grid;grid-template-columns:minmax(280px,380px) minmax(300px,1fr);gap:20px;align-items:start">
-            <section style="min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 20px 22px;display:flex;flex-direction:column;gap:20px">
+          <div data-r="grid" style="display:grid;grid-template-columns:minmax(280px,380px) minmax(300px,1fr);gap:18px;align-items:start">
+            <section style="min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:20px">
               <sc-for list="{{ fields }}" as="f" hint-placeholder-count="4">
                 <div>
                   <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
@@ -192,7 +192,7 @@ textarea{font-family:inherit}
             </section>
 
             <div style="min-width:0;display:flex;flex-direction:column;gap:20px">
-              <section style="min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px">
+              <section style="min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px">
                 <div style="display:flex;gap:26px;align-items:center;flex-wrap:wrap">
                   <div style="flex:1 1 180px;min-width:0">
                     <div style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)">{{ heroLabel }}</div>

@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Scientific Calculator — Calculator Drawer</title>
-<meta name="description" content="Free online scientific calculator with trigonometry, logarithms, powers, roots and factorials. Switch between degrees and radians, with expression entry and history." />
+<meta name="description" content="Free online scientific calculator with trigonometry, logarithms, powers, roots and factorials. Degrees or radians, expression entry and saved history." />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://jgohil07.github.io/CalculatorDrawer/scientific-calculator.html" />
 <meta property="og:url" content="https://jgohil07.github.io/CalculatorDrawer/scientific-calculator.html" />
@@ -15,10 +15,15 @@
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Calculator Drawer" />
 <meta property="og:title" content="Scientific Calculator — Calculator Drawer" />
-<meta property="og:description" content="Free online scientific calculator with trigonometry, logarithms, powers, roots and factorials. Switch between degrees and radians, with expression entry and history." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:description" content="Free online scientific calculator with trigonometry, logarithms, powers, roots and factorials. Degrees or radians, expression entry and saved history." />
+<meta property="og:image" content="https://jgohil07.github.io/CalculatorDrawer/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Calculator Drawer — a calculator keypad showing 7 × 8 = 56" />
+<meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Scientific Calculator — Calculator Drawer" />
-<meta name="twitter:description" content="Free online scientific calculator with trigonometry, logarithms, powers, roots and factorials. Switch between degrees and radians, with expression entry and history." />
+<meta name="twitter:description" content="Free online scientific calculator with trigonometry, logarithms, powers, roots and factorials. Degrees or radians, expression entry and saved history." />
+<meta name="twitter:image" content="https://jgohil07.github.io/CalculatorDrawer/og.png" />
 <link rel="preload" as="script" href="support.js" />
 <link rel="preload" as="fetch" href="calc-shell-pad.dc.html" crossorigin="anonymous" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -69,7 +74,7 @@ html,body{height:auto !important;min-height:100%}
 .theme{display:flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid var(--line);border-radius:7px;background:none;font:inherit;font-size:12px;color:var(--muted);cursor:pointer}
 .theme:hover{color:var(--text)}
 .theme svg{display:block}
-@media (max-width:700px){header .wrap{gap:10px}nav.cats{order:3;flex-basis:100%;overflow-x:auto;flex-wrap:nowrap}.brand{flex:1}}
+@media (max-width:700px){header .wrap{gap:10px}nav.cats{order:3;flex-basis:100%;overflow-x:auto;flex-wrap:nowrap}.brand{flex:1}.brand span:last-child{display:none}.alllink{padding:6px 9px}.cur button{min-height:38px;min-width:34px}.alllink,.viewbtn,.theme{min-height:38px}}
 .crumb{font-size:12px;color:var(--muted);padding:14px 0 0}
 h1{font-size:clamp(24px,4vw,31px);line-height:1.15;letter-spacing:-.028em;font-weight:600;margin:6px 0 14px}
 .lede{font-size:16px;color:var(--muted);margin:0 0 4px;max-width:64ch;text-wrap:pretty}
@@ -153,7 +158,7 @@ html[data-view=compact] [data-r=grid]{align-items:start !important}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-{"@type":"SoftwareApplication","name":"Scientific Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any modern browser","description":"Free online scientific calculator with trigonometry, logarithms, powers, roots and factorials. Switch between degrees and radians, with expression entry and history.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},
+{"@type":"SoftwareApplication","name":"Scientific Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any modern browser","description":"Free online scientific calculator with trigonometry, logarithms, powers, roots and factorials. Degrees or radians, expression entry and saved history.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},
 {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Calculator Drawer","item":"index.html"},{"@type":"ListItem","position":2,"name":"Everyday"},{"@type":"ListItem","position":3,"name":"Scientific Calculator"}]},
 {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it work in degrees or radians?","acceptedAnswer":{"@type":"Answer","text":"Both. The DEG/RAD button on the display switches between them and your choice is remembered."}},{"@type":"Question","name":"What is the largest number it handles?","acceptedAnswer":{"@type":"Answer","text":"Up to roughly 1.8 × 10³⁰⁸, the limit of double-precision floating point. Larger results return an error rather than infinity."}},{"@type":"Question","name":"Do I need to close my brackets?","acceptedAnswer":{"@type":"Answer","text":"No. Any brackets left open when you press equals are closed automatically."}}]}]}
 </script>
@@ -161,7 +166,7 @@ html[data-view=compact] [data-r=grid]{align-items:start !important}
 </head>
 <body>
 <header><div class="wrap">
-<a class="brand" href="index.html"><span class="mark">&#8721;</span>Calculator Drawer</a>
+<a class="brand" href="index.html"><span class="mark">&#8721;</span><span>Calculator Drawer</span></a>
 <nav class="cats" aria-label="Categories">
 <a href="index.html" data-cat="everyday" aria-current="page">Everyday</a><a href="loan-emi-calculator.html" data-cat="loans-credit">Loans &amp; Credit</a><a href="sip-calculator.html" data-cat="investing">Investing</a><a href="income-tax-calculator.html" data-cat="planning-tax">Planning &amp; Tax</a>
 </nav>

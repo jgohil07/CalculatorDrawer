@@ -140,7 +140,7 @@ textarea{font-family:inherit}
           <div data-r="grid" style="display:grid;grid-template-columns:minmax(280px,380px) minmax(300px,1fr);gap:20px;align-items:start">
             <section style="min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:14px">
               <label style="font-size:13px;color:var(--muted)">Data series</label>
-              <textarea spellcheck="false" onChange="{{ onStats }}" value="{{ stats.rawText }}" style="width:100%;min-height:180px;resize:vertical;background:var(--input);border:1px solid var(--line);border-radius:9px;padding:12px 13px;color:var(--text);font-size:14px;line-height:1.6;font-family:'JetBrains Mono',monospace;outline:none"></textarea>
+              <textarea aria-label="Data series" spellcheck="false" onChange="{{ onStats }}" value="{{ stats.rawText }}" style="width:100%;min-height:180px;resize:vertical;background:var(--input);border:1px solid var(--line);border-radius:9px;padding:12px 13px;color:var(--text);font-size:14px;line-height:1.6;font-family:'JetBrains Mono',monospace;outline:none"></textarea>
               <p style="margin:0;font-size:11.5px;color:var(--muted);line-height:1.55">Commas, spaces or newlines all work — anything numeric is picked up. Saved in this browser as you type.</p>
               <div style="border-top:1px solid var(--line-soft);padding-top:12px;font-size:11.5px;color:var(--muted);line-height:1.6">Sorted: <span style="color:var(--text);font-family:'JetBrains Mono',monospace;word-break:break-word">{{ stats.sorted }}</span></div>
             </section>

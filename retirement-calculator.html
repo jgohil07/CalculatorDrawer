@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Retirement Calculator — Calculator Drawer</title>
-<meta name="description" content="Compare the corpus you are on track for against the one your lifestyle will need, with inflation-adjusted spending and the extra monthly saving to close any gap." />
+<meta name="description" content="Compare the corpus you are on track for against the one your lifestyle needs, with inflation-adjusted spending and the saving needed to close the gap." />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://jgohil07.github.io/CalculatorDrawer/retirement-calculator.html" />
 <meta property="og:url" content="https://jgohil07.github.io/CalculatorDrawer/retirement-calculator.html" />
@@ -15,10 +15,15 @@
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Calculator Drawer" />
 <meta property="og:title" content="Retirement Calculator — Calculator Drawer" />
-<meta property="og:description" content="Compare the corpus you are on track for against the one your lifestyle will need, with inflation-adjusted spending and the extra monthly saving to close any gap." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:description" content="Compare the corpus you are on track for against the one your lifestyle needs, with inflation-adjusted spending and the saving needed to close the gap." />
+<meta property="og:image" content="https://jgohil07.github.io/CalculatorDrawer/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Calculator Drawer — a calculator keypad showing 7 × 8 = 56" />
+<meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Retirement Calculator — Calculator Drawer" />
-<meta name="twitter:description" content="Compare the corpus you are on track for against the one your lifestyle will need, with inflation-adjusted spending and the extra monthly saving to close any gap." />
+<meta name="twitter:description" content="Compare the corpus you are on track for against the one your lifestyle needs, with inflation-adjusted spending and the saving needed to close the gap." />
+<meta name="twitter:image" content="https://jgohil07.github.io/CalculatorDrawer/og.png" />
 <link rel="preload" as="script" href="support.js" />
 <link rel="preload" as="fetch" href="calc-shell-form.dc.html" crossorigin="anonymous" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -69,7 +74,7 @@ html,body{height:auto !important;min-height:100%}
 .theme{display:flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid var(--line);border-radius:7px;background:none;font:inherit;font-size:12px;color:var(--muted);cursor:pointer}
 .theme:hover{color:var(--text)}
 .theme svg{display:block}
-@media (max-width:700px){header .wrap{gap:10px}nav.cats{order:3;flex-basis:100%;overflow-x:auto;flex-wrap:nowrap}.brand{flex:1}}
+@media (max-width:700px){header .wrap{gap:10px}nav.cats{order:3;flex-basis:100%;overflow-x:auto;flex-wrap:nowrap}.brand{flex:1}.brand span:last-child{display:none}.alllink{padding:6px 9px}.cur button{min-height:38px;min-width:34px}.alllink,.viewbtn,.theme{min-height:38px}}
 .crumb{font-size:12px;color:var(--muted);padding:14px 0 0}
 h1{font-size:clamp(24px,4vw,31px);line-height:1.15;letter-spacing:-.028em;font-weight:600;margin:6px 0 14px}
 .lede{font-size:16px;color:var(--muted);margin:0 0 4px;max-width:64ch;text-wrap:pretty}
@@ -153,7 +158,7 @@ html[data-view=compact] [data-r=grid]{align-items:start !important}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-{"@type":"SoftwareApplication","name":"Retirement Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any modern browser","description":"Compare the corpus you are on track for against the one your lifestyle will need, with inflation-adjusted spending and the extra monthly saving to close any gap.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},
+{"@type":"SoftwareApplication","name":"Retirement Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any modern browser","description":"Compare the corpus you are on track for against the one your lifestyle needs, with inflation-adjusted spending and the saving needed to close the gap.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},
 {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Calculator Drawer","item":"index.html"},{"@type":"ListItem","position":2,"name":"Planning & Tax"},{"@type":"ListItem","position":3,"name":"Retirement Calculator"}]},
 {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much do I need to retire?","acceptedAnswer":{"@type":"Answer","text":"Enough to fund inflation-adjusted spending for the whole retirement. The calculator derives it from your spending, life expectancy and expected returns rather than a rule of thumb."}},{"@type":"Question","name":"Why is the required corpus so large?","acceptedAnswer":{"@type":"Answer","text":"Inflation. At 6%, spending roughly doubles every twelve years, so a thirty-year horizon means funding a much higher figure than today's."}},{"@type":"Question","name":"What return should I assume after retiring?","acceptedAnswer":{"@type":"Answer","text":"Lower than before — typically 6–8%, reflecting a shift towards debt and income assets."}}]}]}
 </script>
@@ -161,7 +166,7 @@ html[data-view=compact] [data-r=grid]{align-items:start !important}
 </head>
 <body>
 <header><div class="wrap">
-<a class="brand" href="index.html"><span class="mark">&#8721;</span>Calculator Drawer</a>
+<a class="brand" href="index.html"><span class="mark">&#8721;</span><span>Calculator Drawer</span></a>
 <nav class="cats" aria-label="Categories">
 <a href="index.html" data-cat="everyday">Everyday</a><a href="loan-emi-calculator.html" data-cat="loans-credit">Loans &amp; Credit</a><a href="sip-calculator.html" data-cat="investing">Investing</a><a href="income-tax-calculator.html" data-cat="planning-tax" aria-current="page">Planning &amp; Tax</a>
 </nav>

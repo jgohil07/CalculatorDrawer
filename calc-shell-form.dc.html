@@ -153,7 +153,7 @@ textarea{font-family:inherit}
                       </div>
                     </sc-if>
                     <sc-if value="{{ f.isMenu }}" hint-placeholder-val="{{ false }}">
-                      <select data-key="{{ f.k }}" value="{{ f.value }}" onChange="{{ onMenu }}" style="min-width:118px;background:var(--input);border:1px solid var(--line);border-radius:8px;padding:6px 9px;color:var(--text);font-size:13px;font-family:'JetBrains Mono',monospace;outline:none">
+                      <select aria-label="{{ f.l }}" data-key="{{ f.k }}" value="{{ f.value }}" onChange="{{ onMenu }}" style="min-width:118px;background:var(--input);border:1px solid var(--line);border-radius:8px;padding:6px 9px;color:var(--text);font-size:13px;font-family:'JetBrains Mono',monospace;outline:none">
                         <sc-for list="{{ f.options }}" as="o" hint-placeholder-count="4">
                           <option value="{{ o.v }}">{{ o.l }}</option>
                         </sc-for>
@@ -164,7 +164,7 @@ textarea{font-family:inherit}
                         <sc-if value="{{ f.dateHint }}" hint-placeholder-val="{{ false }}">
                           <span style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace">{{ f.dateHint }}</span>
                         </sc-if>
-                        <input type="date" data-key="{{ f.k }}" value="{{ f.value }}" onChange="{{ onText }}" style="background:var(--input);border:1px solid var(--line);border-radius:8px;padding:6px 9px;color:var(--text);font-size:13px;font-family:'JetBrains Mono',monospace;outline:none" />
+                        <input type="date" aria-label="{{ f.l }}" data-key="{{ f.k }}" value="{{ f.value }}" onChange="{{ onText }}" style="background:var(--input);border:1px solid var(--line);border-radius:8px;padding:6px 9px;color:var(--text);font-size:13px;font-family:'JetBrains Mono',monospace;outline:none" />
                       </div>
                     </sc-if>
                     <sc-if value="{{ f.isToggle }}" hint-placeholder-val="{{ false }}">
